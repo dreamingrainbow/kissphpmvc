@@ -1,0 +1,31 @@
+.logo
+{
+     display:inline-block;
+     display:block;
+     height:auto;
+     max-width:100%;
+     padding:4px;
+     margin-bottom:20px;
+     line-height:1.428571429;
+     background-color:#fff;
+     border:0px;
+     -webkit-transition:all .2s ease-in-out;
+     transition:all .2s ease-in-out
+}
+.logo>img
+{
+     display:block;
+     height:auto;
+     max-width:100%;
+     margin-right:auto;
+     margin-left:auto
+}
+a.logo:hover,a.logo:focus,a.logo.active
+{
+     border-color:#428bca
+}
+.logo .caption
+{
+     padding:9px;
+     color:#333
+}
