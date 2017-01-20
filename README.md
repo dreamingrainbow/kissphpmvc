@@ -4,8 +4,9 @@ This README documents steps necessary to get your application up and running.
 
 ### What is this repository for? ###
 ## Quick summary ##
-<p>KISS PHP MVC is a simple php framework for building web applications. Using pretty url's and simple routing you can build application quickly and
-remain Object oriented and develop with expansion in mind.</p>
+KISS PHP MVC is a simple php framework for building web applications. Using pretty url's and simple routing you can build application quickly and
+remain Object oriented and develop with expansion in mind.
+
 ## Version ##
 1.0
 
