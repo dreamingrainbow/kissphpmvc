@@ -1,8 +1,8 @@
-# KISS MVC Cheat Sheet # 
+# KISS MVC Cheat Sheet  
 
-## Directory Structure ##
+## Directory Structure 
 
-### Configs ### 
+### Configs 
 ```
 #!php
 
@@ -12,7 +12,7 @@
 /root/Library
 ```
 
-### Data ### 
+### Data 
 ```
 #!php
 /root/Library/Data
@@ -23,7 +23,7 @@
 		->connection()
 ```
 
-### Filters ### 
+### Filters 
 ```
 /root/Library/Filters
 /root/Library/Filters/CamelCaseToUnderscore.php
@@ -34,22 +34,22 @@
 		ToObject::filter( $array )
 ```
 
-### Traits ### 
+### Traits
 ```
 /root/Library/Traits/
 ```
 
-### Validation ### 
+### Validation
 ```
 /root/Library/Validation
-```
 /root/Library/Validation/MemberExists.php
 		MemberExists::inValid( $str )
 ```
 
-## Library Files ##
+## Library Files 
 
-### Application ### 
+### Application
+
 ```
 /root/ Library/Application.php
 		Application::getInstance()
@@ -59,15 +59,21 @@
 		->gotoRouteAndExit(Request $request)
 ```
 
-### Autoload ### 
+### Autoload
 ```
 /root/ Library/Autoload.php
 ```
+
+### Config
 ```
 /root/ Library/Config.php
 		->Production
 		->Routes
 		->Database
+```
+
+### Autoload
+```
 /root/ Library/Controller.php
 	->dispatch()
 	->setNoRenderView()
@@ -83,9 +89,24 @@
 	->renderAsJSON($arr)
 	->getInstance()
 	->gotoRouteAndExit(Request $request)
+```
+
+### Database
+```
 /root/ Library/Database.php
+```
+
+### Autoload
+```
 /root/ Library/Exception.php
+```
+
+### Autoload
+```
 /root/ Library/Module.php
+```
+### Request
+```
 /root/ Library/Request.php
 	->getCurrentRequest()
 	->requestToRoute()
@@ -94,6 +115,10 @@
 	->setRoute(Route $route, $params = null)
 	->getRoute()
 	->isValid()
+```
+
+### Route
+```
 /root/ Library/Route.php
 	Route::getInstance()
 	->isValid()
@@ -102,15 +127,21 @@
 	->controller
 	->action
 	->routePattern
+```
+
+### RouteList
+```
 /root/ Library/RouteList.php
 	->getRoute($name)
 	->routes
 ```
 
+### Modules
 ```
 /root/Modules
 ```
 
+### Primary Module
 ```
 /root/Modules/Primary
 /root/Modules/Primary/Controllers
@@ -119,6 +150,7 @@
 /root/Modules/Primary/Views
 ```
 
+### Public Folders
 ```
 /root/Public
 /root/Public/css
@@ -128,6 +160,7 @@
 /root/Public/index.php
 ```
 
+### htaccess and Readme
 ```
 /root/.htaccess
 /root/readme.md
