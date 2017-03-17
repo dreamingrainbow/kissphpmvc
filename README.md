@@ -1,7 +1,8 @@
 # KISS MVC Cheat Sheet # 
 
-### Directory Structure ### 
+## Directory Structure ##
 
+### Configs ### 
 ```
 #!php
 
@@ -11,7 +12,9 @@
 /root/Library
 ```
 
+### Data ### 
 ```
+#!php
 /root/Library/Data
 /root/Library/Data/Pdo
 /root/Library/Data/Pdo/MySql.php extends PDO	
@@ -20,6 +23,7 @@
 		->connection()
 ```
 
+### Filters ### 
 ```
 /root/Library/Filters
 /root/Library/Filters/CamelCaseToUnderscore.php
@@ -30,10 +34,12 @@
 		ToObject::filter( $array )
 ```
 
+### Traits ### 
 ```
 /root/Library/Traits/
 ```
 
+### Validation ### 
 ```
 /root/Library/Validation
 ```
@@ -41,6 +47,9 @@
 		MemberExists::inValid( $str )
 ```
 
+## Library Files ##
+
+### Application ### 
 ```
 /root/ Library/Application.php
 		Application::getInstance()
@@ -48,7 +57,13 @@
 		->getGUID()
 		->getConfigs()
 		->gotoRouteAndExit(Request $request)
+```
+
+### Autoload ### 
+```
 /root/ Library/Autoload.php
+```
+```
 /root/ Library/Config.php
 		->Production
 		->Routes
