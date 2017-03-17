@@ -1,19 +1,26 @@
-KISS MVC Cheat Sheet 
+# KISS MVC Cheat Sheet # 
 
-Directory Structure 
+### Directory Structure ### 
 
+```
+#!php
 
 /root
 /root/Config
 /root/Config/Config.ini
 /root/Library
+```
 
+```
 /root/Library/Data
 /root/Library/Data/Pdo
 /root/Library/Data/Pdo/MySql.php extends PDO	
 /root/Library/Data/Pdo/MySql
 /root/Library/Data/Pdo/MySql/Table
 		->connection()
+```
+
+```
 /root/Library/Filters
 /root/Library/Filters/CamelCaseToUnderscore.php
 		CamelCaseToUnderscore::filter( $word )
@@ -21,10 +28,20 @@ Directory Structure
 		StripAlpha::filter( $str )
 /root/Library/Filters/ToObject.php
 		ToObject::filter( $array )
+```
+
+```
 /root/Library/Traits/
+```
+
+```
 /root/Library/Validation
+```
 /root/Library/Validation/MemberExists.php
 		MemberExists::inValid( $str )
+```
+
+```
 /root/ Library/Application.php
 		Application::getInstance()
 		Application::init()
@@ -73,19 +90,30 @@ Directory Structure
 /root/ Library/RouteList.php
 	->getRoute($name)
 	->routes
+```
 
+```
 /root/Modules
+```
 
+```
 /root/Modules/Primary
 /root/Modules/Primary/Controllers
 /root/Modules/Primary/Controllers/Pages.php
 		extends Library/Controller or Auth/Controller	
 /root/Modules/Primary/Views
+```
+
+```
 /root/Public
 /root/Public/css
 /root/Public/fonts
 /root/Public/img
 /root/Public/js
 /root/Public/index.php
+```
+
+```
 /root/.htaccess
 /root/readme.md
+```
