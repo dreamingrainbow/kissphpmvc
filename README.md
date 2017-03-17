@@ -1,4 +1,5 @@
 # KISS MVC Cheat Sheet  
+This page is a brief overview of the structure and function available from the base KISS MVC. There are many way's to use this framework, for example if your just displaying a page you wont need a controller action, however if you have controller action's that need to override the view utilizing the controller to control your view. The main idea behind this framework was I loved how the first versions of ZF you where able to get started quickly and not worry as much about the page url but what the page should be doing. Creating code that last is as important as creating code that can easily be modified to grow with the future. Kiss a simple MVC style framework will allow your to get the basics out of the way and develop the application you want. Below list the basic edition of KISS MVC Framework.
 
 ## Directory Structure 
 
