@@ -1,0 +1,5 @@
+<?php if($this->isAllowedRoute($this->_instance->getRouteList()->routes['AuthUsers'], $this->user )):?>
+<li <?=($this->location == 'Users') ? 'class="active"':'';?>>
+     <a href="\AuthUsers">Users</a>
+</li>
+<?php endif;?>

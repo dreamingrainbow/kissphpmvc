@@ -46,6 +46,15 @@ class RouteList
           }
      }
      
+     public function getRoute($name)
+     {
+          if(array_key_exists($name, $this->_routeList))
+          {
+               return $this->_routeList[$name];
+          }
+          return false;
+     }
+     
      public function __get( $name )
      {
           if($name == 'routes')

@@ -1,0 +1,10 @@
+<?php if($this->isAllowedRoute($this->_instance->getRouteList()->routes['Backup'], $this->user )):?>
+<li >
+     <a href="\Backup">Backup</a>
+</li>
+<?php endif;?>
+<?php if($this->isAllowedRoute($this->_instance->getRouteList()->routes['Restore'], $this->user )):?>
+<li >
+     <a href="\Restore">Restore</a>
+</li>
+<?php endif;?>

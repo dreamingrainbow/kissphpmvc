@@ -62,6 +62,14 @@ class Config
             }
             return $this->_Routes;
         }
+        elseif($name == 'Database')
+        {
+            if(array_key_exists('Database', $this->_configIni))
+            {
+                $this->_Database = Filters\ToObject::filter( $this->_configIni['Database'] );
+            }
+            return $this->_Database;
+        }
     }
     
     private function load()

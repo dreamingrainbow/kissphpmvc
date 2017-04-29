@@ -1,0 +1,1 @@
+<?=json_encode(array('Michael','Brian','Ted'));
