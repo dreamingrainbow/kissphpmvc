@@ -89,7 +89,6 @@ class Route
 			return $this->_routePattern;
 		}
 	}
-	
     public static function getInstance() 
     {
         if( !self::$_instance instanceof Route )

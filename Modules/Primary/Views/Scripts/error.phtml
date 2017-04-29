@@ -11,24 +11,13 @@
             <!--[if lt IE 9]>
             <script src="/js/html5shiv.js"></script>
             <![endif]-->
-        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
         <script type="text/javascript" src="/js/scripts.js"></script>
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <?php echo $this->getPartial('mainMenu', 'Primary', array('location'=>'Error'));?>
+        <?php echo $this->getPartial('top-banner', 'Primary');?>
         <h1>Application error!</h1>
-        <?php
-        switch($this->errorType)
-        {
-            case '403 Forbidden':
-                echo $this->getPartial('403', 'Primary');
-                break;
-            case '404 Not Found':
-            default:
-                echo $this->getPartial('404', 'Primary');
-                break;
-        }
-        ?>
+        
     </body>
 </html>

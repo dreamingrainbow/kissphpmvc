@@ -18,8 +18,6 @@ class Request
 		}
 		if(!isset($this->url_elements))
 		{
-		
-			//TODO:: Add Cli routing
 			$cleanRequestURI = explode('?', $_SERVER['REQUEST_URI'] );
 			if( substr( $cleanRequestURI[0] , (strlen($cleanRequestURI[0]) )-1) == '/' )
 			{
@@ -27,8 +25,6 @@ class Request
 			}
 			$this->url_elements = explode('/', $cleanRequestURI[0] );
 		}
-		
-		
 	}
 	
 	public function requestToRoute()

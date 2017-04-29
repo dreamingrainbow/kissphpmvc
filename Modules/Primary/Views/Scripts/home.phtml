@@ -4,64 +4,27 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Michael A. Dennis<michaeladennis@comcast.net>">
-        <link href="/css/bootstrap.css" rel="stylesheet">
         <link href="/css/bootstrap-theme.css" rel="stylesheet">
+        <link href="/css/bootstrap.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
             <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
             <!--[if lt IE 9]>
             <script src="/js/html5shiv.js"></script>
             <![endif]-->
-        <script type="text/javascript" src="/js/jquery.js"></script>
-        
-        <script type="text/javascript" src="/js/bootstrap.js"></script>
-        <script>
-            var userData = <?/*=json_encode($this->test);*/?>;
-        </script>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
         <script type="text/javascript" src="/js/scripts.js"></script>
-        <script>
-            $(function()
-              {
-                /*loadPage(page,limit);*/
-                });
-        </script>
-
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-    <?php echo $this->getPartial('mainMenu', 'Primary', array('location'=>'Home'));?>
-        <div class="clearfix">            
-            <div class="col-sm-3">
-                
-            </div>           
-            <div class="col-sm-6 text-center">
-                <div class="pagination-wrapper" style="margin-left:auto;margin-right:auto;width:100%;">
-                    <ul class="pagination pagination-xs">
-                        <li><a href="#">First</a></li>
-                        <li><a href="#">Previous</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">Next</a></li>
-                        <li><a href="#">Last</a></li>
-                    </ul>
-                    
-                </div>
-                <div class="now-showing" style="margin-left:auto;margin-right:auto;margin-top:-14px;">
-                    <small>Showing Record(s) x thru x  of x | Page x of x</small>
-                </div>
-                
-            </div>              
-            <div class="col-sm-3 text-right">
-            <br/>
-                <form class="form" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
-                </form>
-            </div>          
-        </div>
-        <div id="body-wrapper" class="container-fluid"></div>
+        <?php echo $this->getPartial('top-banner', 'Primary');?>
+        <?php echo $this->getPartial('top-panels', 'Primary');?>
+        <?php echo $this->getPartial('scoop', 'Primary');?>
     </body>
 </html>
+
+
+
+<\?php var_dump($this->test);?><br/>
+<\?php echo $this->getPartial('test', 'Primary', array('mild'=>'else', 'test' => $this->test ));?><br/>
+<\?php var_dump($this->getRequest()->getParam('var1'));?><br/>
+<\?php var_dump($this->getRequest()->getParam('var2'));?><br/>
