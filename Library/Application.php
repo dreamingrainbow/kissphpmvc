@@ -31,7 +31,7 @@ class Application
         {
             $this->fileNotFound();
         }        
-        $this->gotoRouteAndExit( $this->request );
+        return $this->gotoRouteAndExit( $this->request );
     }
     
     protected function setGUID()
@@ -67,29 +67,14 @@ class Application
         return $this->routeList;
     }
     
-    public function fileNotFound()
-    {
-        header("HTTP/1.0 404 Not Found");
-        exit( );
-    }
-
-    public function permissionDenied()
-    {
-        header('HTTP/1.0 403 Forbidden');
-        exit();
-    }
-    
     public function gotoRouteAndExit( Request $request )
     {
-        //$request->getParams();
-        //var_dump($request->getParam('z'));
         $route = $request->getRoute();
         $moduleName = "{$route->module}";
         $controllerName = "{$route->controller}";        
-        $className = DIRECTORY_SEPARATOR . 'Modules' . DIRECTORY_SEPARATOR . "$moduleName" . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $controllerName;        
-        $controller = new $className( $request );
-        $controller->exec();
-        exit();
+        $className =  "Modules\\{$moduleName}\Controllers\\{$controllerName}";
+        $controller = new $className( $this, $request );
+        return $controller->exec();
     }
     
     public static function init()

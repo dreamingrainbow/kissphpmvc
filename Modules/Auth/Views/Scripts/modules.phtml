@@ -1,0 +1,40 @@
+<!DOCTYPE >
+<html lang="En">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Michael A. Dennis<michaeladennis@comcast.net>">
+        <link href="/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/bootstrap-theme.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+            <script src="/js/html5shiv.js"></script>
+            <![endif]-->
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        
+        <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+    </head>
+    <body>
+    <?php echo $this->getPartial('mainMenu', 'Primary', array('location'=>'Modules'));?>
+     <h1>Modules</h1>
+     
+     <table class="table table responsive table-striped table-hover">
+        <thead>
+            <tr>
+                <th>MODULE</th>
+                <th>OPTIONS</th>
+            </tr>            
+        </thead>
+        <tbody>
+            <?php foreach($this->modules as $module):?>
+            <tr>                
+                <td><?=$module;?></td>
+                <td><button class="btn btn-xs btn-primary">More Options</button></td>
+            </tr>
+            <?php endforeach;?>
+        </tbody>
+     </table>   
+    </body>
+</html>

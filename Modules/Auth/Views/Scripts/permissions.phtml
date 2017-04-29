@@ -1,0 +1,62 @@
+<!DOCTYPE >
+<html lang="En">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Michael A. Dennis<michaeladennis@comcast.net>">
+        <link href="/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/bootstrap-theme.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+            <script src="/js/html5shiv.js"></script>
+            <![endif]-->
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        
+        <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+    </head>
+    <body>
+    <?php echo $this->getPartial('mainMenu', 'Primary', array('location'=>'Permissions'));?>
+    Role : <?=$this->selectedRole;?> Children : Guest
+    <table class="table-striped">
+        <thead>
+            <tr>
+                <th>ROUTE</th>
+                <?php foreach($this->roles as $role):?>
+                <th class="col-sm-2">                        
+                        <?=$role['role'];?>                        
+                </th>
+                <?php endforeach;?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach( $this->getInstance()->getRouteList()->routes as $routeName => $route):?>
+            <tr>
+                <td><?=$routeName;?></td>
+                <?php foreach($this->roles as $role):?>
+                                       
+                    <?php
+                        $allowed =  '<td class="col-sm-2 text-danger">Denied</td>';
+                        if($this->isPublicRoute($route))
+                        {
+                            $allowed =  '<td class="col-sm-2 text-success">Allowed</td>';
+                        }
+                        else
+                        {
+                            $user = $this->getModel('User','Auth');
+                            $user->role = $role['role'];                        
+                            if($this->isAllowedRoute($route, $user))
+                            {
+                                $allowed =  '<td class="col-sm-2 text-success">Allowed</td>';
+                            }
+                        }
+                    ?>
+                    <?=$allowed;?>
+                <?php endforeach;?>
+            </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+    </body>
+</html>

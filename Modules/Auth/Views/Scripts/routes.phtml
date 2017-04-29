@@ -1,0 +1,143 @@
+<!DOCTYPE >
+<html lang="En">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Michael A. Dennis<michaeladennis@comcast.net>">
+        <link href="/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/bootstrap-theme.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+            <script src="/js/html5shiv.js"></script>
+            <![endif]-->
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        
+        <script type="text/javascript" src="/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/js/aux/routes.js"></script>
+    </head>
+    <body id="top">
+        <script>
+            $(function(){
+    <?php foreach($this->modules as $k => $module):?>
+                $('#<?=$module;?>-content').hide();
+    <?php endforeach;?>
+            });
+        </script>
+    <?php echo $this->getPartial('mainMenu', 'Primary', array('location'=>'Routes'));?>
+        <div class="container">
+            <div class="row">
+                <div class=col-md-12">
+                    <?php $standardRoutes = $this->standardRoutes;?>
+                    <strong>Total Standard Routes</strong> : <?=count($standardRoutes);?>
+                    <strong>Total Public Routes</strong> : <span class="text-success"><?=count($this->publicRoutes);?></span>
+                    <strong>Total Private Routes</strong> : <span class="text-danger"><?=count($this->privateRoutes);?></span>
+                    <strong>Total Unlisted Routes</strong> : <span class="text-warning"><?=count($standardRoutes) - (count($this->privateRoutes)+count($this->publicRoutes));?></span>
+                    <button class="btn btn-xs" onclick="sortSection('ByModule', <?=$module;?>)">Module <em class="glyphicon glyphicon-triangle-bottom" style="padding: 3px 3px;"></em></button>
+                    <form name="routeFilterForm" class="pull-right form-inline">
+                        <small>Search : </small>
+                        <input type="text" id="routeSearchTerms" name="routeSearchTerms" placeholder="Start typing to filter." class="form-control input-sm"/>
+                    </form>                                                                 
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-md-12">
+                    <ul class="nav nav-pills">
+                        <?php foreach($this->modules as $k => $module):?>
+                        <li><a href="#<?=$module;?>-top"><?=$module;?></a></li>
+                        <?php endforeach;?>
+                    </ul>
+                    <ul class="list-unstyled">                     
+                <?php foreach($this->modules as $k => $module):?>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12" id="<?=$module;?>-top">
+                                        <h3>
+                                            <button class="btn btn-xs" onclick="toggleSection(this,'<?=$module;?>-content');" style="margin-top:-3px;"><em class="glyphicon glyphicon-plus" style="padding: 2px 3px;"></em></button>
+                                            <strong><?=$module;?></strong>
+                                            
+                                            <div class="pull-right" style="padding: 3px 3px;">
+                                                <small>Sort By : </small>   
+                                                    <button class="btn btn-xs" onclick="sortSection('ByController', <?=$module;?>)">Controller <em class="glyphicon glyphicon-triangle-bottom" style="padding: 3px 3px;"></em></button>
+                                                    <button class="btn btn-xs" onclick="sortSection('ByRouteName', <?=$module;?>)">Route Name <em class="glyphicon glyphicon-triangle-bottom" style="padding: 3px 3px;"></em></button>
+                                                    <button class="btn btn-xs" onclick="sortSection('ByRoutePattern', <?=$module;?>)">Route Pattern <em class="glyphicon glyphicon-triangle-bottom" style="padding: 3px 3px;"></em></button>
+                                            </div>
+                                        </h3>
+                                                                                   
+                                         
+                                        <strong>Standard Routes</strong> : <span id="<?=$module;?>-standard-route-count"></span>
+                                        <strong>Public Routes</strong> : <span id="<?=$module;?>-public-route-count" class="text-success"></span>
+                                        <strong>Private Routes</strong> : <span id="<?=$module;?>-private-route-count" class="text-danger"></span>
+                                        <strong>Unlisted Routes</strong> : <span id="<?=$module;?>-unlisted-route-count" class="text-warning"></span>
+                                        
+                                        <div class="pre-scrollable col-md-12" id="<?=$module;?>-content">
+                                            <?php
+                                            $privateCount = 0;
+                                            $publicCount = 0;
+                                            $unlistedCount = 0;
+                                            ?>
+                                            <?php foreach($this->standardRoutes as $routeName => $route):?>
+                                                <?php if($route->module == $module):?>
+                                            
+                                                    <table class="table table-bordered" id="<?=$route->name;?>-table">
+                                                        <tr>
+                                                            <td colspan=4 >
+                                                                <div class="btn-group btn-group-xs">
+                                                                    <button class="btn"><em class="glyphicon glyphicon-pencil"></em></button>
+                                                                    <button class="btn btn-danger"><em class="glyphicon glyphicon-trash"></em></button>
+                                                                </div>
+                                                                <?php if($this->isPublicRoute($route)):?>
+                                                                    <?php $publicCount++;?>
+                                                                    <button class="btn btn-xs btn-success pull-right">Public Route</button>
+                                                                <?php else:?>
+                                                                    <?php if( $this->isPrivateRoute($route)  ):?>
+                                                                    <?php $privateCount++;?>
+                                                                    <button class="btn btn-xs btn-danger pull-right">Private Route</button>
+                                                                    <?php else:?>
+                                                                    <?php $unlistedCount++;?>
+                                                                    <button class="btn btn-xs btn-warning pull-right">Unlisted Route</button>
+                                                                    <?php endif;?>
+                                                                <?php endif;?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="bg-info">Route Name</th>
+                                                            <th class="bg-info">Module</th>
+                                                            <th class="bg-info">Controller</th>
+                                                            <th class="bg-info">Action</th>
+                                                        </tr>
+                                                        <tr>                                                        
+                                                            <td ><?=$route->name;?></td>
+                                                            <td><?=$route->module;?></td>
+                                                            <td ><?=$route->controller;?></td>
+                                                            <td><?=$route->action;?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="bg-info">Route Pattern</th><td colspan=3><?=$route->routePattern;?></td>
+                                                        </tr>
+                                                    </table>
+                                                    
+                                                <?php endif;?>
+                                            <?php endforeach;?>
+                                        <script>
+                                            $(function(){
+                                                    $('#<?=$module;?>-standard-route-count').append('<?=$publicCount+$privateCount+$unlistedCount;?>');
+                                                    $('#<?=$module;?>-public-route-count').append('<?=$publicCount;?>');
+                                                    $('#<?=$module;?>-private-route-count').append( '<?=$privateCount;?>');
+                                                    $('#<?=$module;?>-unlisted-route-count').append( '<?=$unlistedCount;?>');
+                                                });   
+                                        </script>    
+                                        
+                                        </div>
+                                    </div>
+                                    <small><a class="btn btn-xs" href="#top">Back To Top</a></small> 
+                                </div>
+                            </li>
+                <?php endforeach;?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+</html>
