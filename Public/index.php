@@ -9,6 +9,7 @@ set_include_path( implode( PATH_SEPARATOR, array(
     DEFAULT_PATH . 'Library',
     get_include_path(),
 )));
+ 
 function debug()
 {
     foreach(func_get_args() as $arg)
@@ -58,12 +59,4 @@ require_once( DEFAULT_PATH . 'Library'.DIRECTORY_SEPARATOR.'Autoload.php' );
 spl_autoload_extensions('.php');
 spl_autoload_register(array( new Library\Autoload(), 'LoadLibrary'), true);
 use Library\Application;
-use Library\Exception;
-try
-{
-    Application::init();
-}
-catch( \Exception $e )
-{   
-    throw new Exception( $e->getMessage(), $e->getCode(), $e->getPrevious() );
-}
+Application::init();

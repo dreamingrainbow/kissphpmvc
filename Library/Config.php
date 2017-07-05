@@ -72,7 +72,7 @@ class Config
         }
     }
     
-    private function load()
+    public function load()
     {
         
         if( file_exists( $this->iniLocation ) && is_readable( $this->iniLocation ) )

@@ -1,6 +1,7 @@
 <?php
 namespace Modules\HelloWorld\Controllers;
-class HelloWorld extends \Library\Controller
+use \Library\Controller;
+class HelloWorld extends Controller
 {
     public function home()
     {

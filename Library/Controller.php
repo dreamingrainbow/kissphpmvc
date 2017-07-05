@@ -40,7 +40,7 @@ class Controller
         $moduleName = "{$route->module}";
         $controllerName = "{$route->controller}";
         $actionName = "{$route->action}";
-        $fileName = DEFAULT_PATH . 'Modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR . $actionName;
+        $fileName = DEFAULT_PATH . 'Modules' . DIRECTORY_SEPARATOR . $moduleName . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR . $controllerName . DIRECTORY_SEPARATOR . $actionName;
         $this->_view = $fileName;
         require_once($this->_view .'.phtml');
     }
@@ -81,7 +81,7 @@ class Controller
         
         $this->errorType = '404 Not Found';
         header("HTTP/1.0 404 Not Found");        
-        $className = DEFAULT_PATH . 'Modules' . DIRECTORY_SEPARATOR . 'Primary' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR . 'error.phtml';
+        $className = DEFAULT_PATH . 'Modules' . DIRECTORY_SEPARATOR . 'Primary' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR .'Error'. DIRECTORY_SEPARATOR . 'error.phtml';
         if(file_exists($className) && is_readable($className))
         {
             include( $className );
@@ -106,7 +106,7 @@ class Controller
         
         $this->errorType = '403 Forbidden';
         header('HTTP/1.0 403 Forbidden');
-        $fileName = DEFAULT_PATH . 'Modules' . DIRECTORY_SEPARATOR . 'Primary' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR . 'error.phtml';
+        $fileName = DEFAULT_PATH . 'Modules' . DIRECTORY_SEPARATOR . 'Primary' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'Scripts' . DIRECTORY_SEPARATOR . 'Error' . DIRECTORY_SEPARATOR . 'error.phtml';
         if(file_exists($fileName) && is_readable($fileName))
         {
             include( $fileName );

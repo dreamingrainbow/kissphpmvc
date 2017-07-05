@@ -9,7 +9,10 @@ class Application
     private $route;
     private $request;
     private static $_instance;
-
+    private $cache = array();
+    private $flashAlerts = array();
+    private $apiOverride = false;
+    
     public static function getInstance() 
     {
         if( !self::$_instance instanceof Application )
@@ -51,20 +54,25 @@ class Application
       
     public function getConfigs()
     {
-        if(!isset( $this->configs ) || !$this->configs instanceof Config )
-        {
-            $this->configs = new Config();
-        }        
+        $this->configs = new Config();
+                
         return $this->configs;
     }
     
     public function getRouteList()
     {
-        if(!isset( $this->routeList ) || !$this->routeList instanceof RouteList )
-        {
-            $this->routeList = new RouteList( $this->configs->Routes );
-        }
+        $this->routeList = new RouteList( $this->configs->Routes );
         return $this->routeList;
+    }
+    
+    public function isOverride()
+    {
+        return $this->apiOverride ? true : false;
+    }
+    
+    public function setAPIOverride()
+    {
+        $this->apiOverride = true;    
     }
     
     public function gotoRouteAndExit( Request $request )
@@ -81,5 +89,52 @@ class Application
     {
         $instance = self::getInstance();
         $instance->load();
+    }
+
+    public function __call($name, $args)
+    {
+        switch($name)
+        {
+            case 'setMessage':
+                $this->flashAlerts[] = array('type'=>'primary','title'=>$args[0], 'message'=>$args[1]);
+                return $this;
+                break;            
+            case 'setInfo':
+                $this->flashAlerts[] = array('type'=>'info','title'=>$args[0], 'message'=>$args[1]);
+                return $this;
+                break;
+            case 'setSuccess':
+                $this->flashAlerts[] = array('type'=>'success','title'=>$args[0], 'message'=>$args[1]);
+                $this->flashAlerts;
+                return $this;
+                break;
+            case 'setWarning':
+                $this->flashAlerts[] = array('type'=>'warning','title'=>$args[0], 'message'=>$args[1]);
+                $this->flashAlerts;
+                return $this;
+                break;
+            case 'setDanger':
+                $this->flashAlerts[] = array('type'=>'danger','title'=>$args[0], 'message'=>$args[1]);
+                $this->flashAlerts;
+                return $this;
+                break;
+            case 'getAlerts':
+                return $this->flashAlerts;
+                break;
+        }
+    }
+    
+    public function __set($name, $value)
+    {
+        $this->cache[$name] = $value;
+        return $this;
+    }
+    
+    public function __get($name)
+    {
+        if(isset($this->cache[$name]))
+        {
+            return $this->cache[$name];
+        }
     }
 }

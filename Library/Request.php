@@ -86,6 +86,10 @@ class Request
 						{
 							$pass = true;
 						}
+						else
+						{
+							$pass = false;
+						}
 						if( !isset($this->url_elements[$i]) && $patternSegments['Label'] == '')
 						{
 							$pass = true;
@@ -111,9 +115,66 @@ class Request
 			}
 		}
 		$routeCount = count($routes);
+		$_nRoutes = array();
 		if( $routeCount != 1 )
 		{
-			throw new \Exception('Invalid Configuration. Cannot narrow route to one.');
+			$n = false;
+			if(isset($this->url_elements[1]) )
+			{
+		
+				foreach( $routes as $wideList )
+				{
+					/*Split the route Pattern To get Expanded Url Elements*/
+					$routePatternArr = explode( '/', $wideList->routePattern );
+					$routePatternSegments = array();
+					foreach( $routePatternArr as $patternSegment )
+					{
+						if( strpos( $patternSegment , ':' ) !== false)
+						{
+							$segments =  explode(':', $patternSegment);
+							if( strpos( $patternSegment , ':' ) != 0 )
+							{
+								$routePatternSegments[] = array('Label' => $segments[0]);
+								$routePatternSegments[] = array('Label' => $segments[1],'Value' => $segments[1]);
+							}
+							else
+							{
+								$routePatternSegments[] = array('Label' => $segments[1],'Value' => $segments[1]);
+							
+							}
+						}
+						else
+						{
+							$routePatternSegments[] = array('Label'=>$patternSegment);							
+						}
+					}
+					$rPass = true;
+					for($i = 0; $i < count($routePatternSegments); $i++)
+					{
+						
+						if($routePatternSegments[$i]['Label'] != $this->url_elements[$i])
+						{
+							if(!isset($routePatternSegments[$i]['Value']))
+								$rPass = false;
+						}												
+					}
+					
+					if($rPass)
+						$_nRoutes[] = $wideList;
+				}
+				if(count($_nRoutes) == 1)
+				{
+					$this->_route = array_pop($_nRoutes);
+					$this->_requestRouted = true;
+					$this->_valid = true;
+					return $this;
+				}
+				$c=new Controller(Application::getInstance(), $this );
+				return $c->fileNotFound();
+			}
+			
+			$c=new Controller(Application::getInstance(), $this );
+			return $c->fileNotFound();			
 		}
 		$this->_route = array_pop($routes);
 		$this->_requestRouted = true;
