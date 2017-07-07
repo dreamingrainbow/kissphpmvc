@@ -22,7 +22,7 @@ function debug()
 
 function json_encode_recursive(array $arr)
 {
-    $en = [];
+    $en = array();
     foreach($arr as $k => $v)
     {
         if(is_array($v))
@@ -39,7 +39,7 @@ function json_encode_recursive(array $arr)
 
 function json_decode_recursive($json)
 {
-    $results = [];
+    $results = array();
     $de = json_decode($json);
     foreach($de as $k => $arr)
     {
