@@ -186,8 +186,9 @@ class Controller
     
     public function getController($controller, $module)
     {
-        $r = new \Library\Request();
-        $v = new \Modules\{$module}\Controllers\{$controller}($this->_instance, $r);
+        $r = new \Library\Request();        
+        $c =  '\\Modules\\' . $module.  '\\Controllers\\' . $controller;        
+        $v = new $c($this->getInstance(), $r);
         return $v;
     }
     
