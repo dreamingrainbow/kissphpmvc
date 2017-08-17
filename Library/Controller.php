@@ -184,6 +184,13 @@ class Controller
         return $this->models[$module][$model];
     }
     
+    public function getController($controller, $module)
+    {
+        $r = new \Library\Request();
+        $v = new \Modules\{$module}\Controllers\{$controller}($this->_instance, $r);
+        return $v;
+    }
+    
     public function __call($name, $arguments)
     {
         if($name == 'gotoRouteAndExit')
