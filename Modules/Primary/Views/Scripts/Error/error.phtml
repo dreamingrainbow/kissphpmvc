@@ -22,11 +22,11 @@
         switch($this->errorType)
         {
             case '403 Forbidden':
-                echo $this->getPartial('403', 'Primary');
+                echo $this->getPartial('Error/403', 'Primary');
                 break;
             case '404 Not Found':
             default:
-                echo $this->getPartial('404', 'Primary');
+                echo $this->getPartial('Error/404', 'Primary');
                 break;
         }
         ?>
