@@ -6,6 +6,33 @@ After downloading, you may need to setup your `.htaccess` file for the mod_rewri
 
 If you are using the internal php server to test this framework use '-t ./Public'
 
+##Directory Structure
+```
+kissphpmvc/
+ Config/
+  Config.ini * Required File.
+ Library/
+  Data/
+  Filters/
+  Validators/
+  {LibraryFiles} ** See List of Library Files
+ Modules
+  HelloWorld/  *This can be removed as it just a basic example of use.
+  Primary/ *This is the default Module.
+   Controllers/
+    /* Optional Module Controllers */
+   Data/
+    /* Optional Data Structures */
+   Views/
+    Scripts/     
+     /Error
+     /Pages
+      home.phtml  /* View Files end in phtml as they may contain any language. */
+ Public
+  index.php * No need to modify this file!
+  {Include any project public assets here}
+
+
 ##Your First App
 Navigate kissphpmvc > Modules 
 
